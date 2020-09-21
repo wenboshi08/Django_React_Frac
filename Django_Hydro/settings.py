@@ -25,7 +25,7 @@ SECRET_KEY = 'p^80r2xa$*hfe=uwz!$w#61n_iow@cd$z0cmi_1ej=0=gnfx*+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['django-react-hydro.eba-r2aqsr9e.us-east-1.elasticbeanstalk.com']
 
 
 # Application definition
