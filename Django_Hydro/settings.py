@@ -26,7 +26,9 @@ SECRET_KEY = 'p^80r2xa$*hfe=uwz!$w#61n_iow@cd$z0cmi_1ej=0=gnfx*+'
 DEBUG = True
 
 # ALLOWED_HOSTS = ['django-react-hydro.eba-r2aqsr9e.us-east-1.elasticbeanstalk.com']
-ALLOWED_HOSTS =['ec2-52-86-143-14.compute-1.amazonaws.com','52.86.143.14']
+ALLOWED_HOSTS =['ec2-52-86-143-14.compute-1.amazonaws.com',
+                '52.86.143.14',
+                'django-react-hydro.eba-r2aqsr9e.us-east-1.elasticbeanstalk.com']
 
 # Application definition
 
