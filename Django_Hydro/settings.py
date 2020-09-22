@@ -143,5 +143,6 @@ STATIC_ROOT = 'static'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'home/static'),
-    # os.path.join(BASE_DIR, 'disclosureUI/static'),
+    os.path.join(BASE_DIR, 'disclosureUI/static'),
+    os.path.join(BASE_DIR, 'flowbackUI/static'),
 ]
