@@ -14,14 +14,14 @@ class App extends React.Component {
                 <Tabs>
                     <TabPane tab={<span>
                         <Icon type="dashboard" theme="twoTone" />
-                        Transformation App
+                        Look Up By Chemical
                     </span>}
                     key="1">
                         <TransformationApp />
                     </TabPane>
                     <TabPane tab={<span>
                         <Icon type="database" theme="twoTone" />
-                        DataFilter App
+                        Look Up By Well
                     </span>}
                     key="2">
                         <DataFilterApp />
