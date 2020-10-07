@@ -16,7 +16,7 @@ class AdvancedSearchForm extends Component {
                                 message: 'Input something!',
                             },
                         ],
-                    })(<Input placeholder="placeholder"/>)}
+                    })(<Input placeholder="e.g., MA"/>)}
                 </Form.Item>
             </Col>,
         );
@@ -26,11 +26,11 @@ class AdvancedSearchForm extends Component {
                     {getFieldDecorator('api_number', {
                         rules: [
                             {
-                                required: true,
+                                required: false,
                                 message: 'Input something!',
                             },
                         ],
-                    })(<Input placeholder="placeholder"/>)}
+                    })(<Input placeholder="e.g., 2147483647"/>)}
                 </Form.Item>
             </Col>,
         );
@@ -40,11 +40,11 @@ class AdvancedSearchForm extends Component {
                     {getFieldDecorator('operator_name', {
                         rules: [
                             {
-                                required: true,
+                                required: false,
                                 message: 'Input something!',
                             },
                         ],
-                    })(<Input placeholder="placeholder"/>)}
+                    })(<Input placeholder="e.g., ConocoPhillips Company/Burlington Resources"/>)}
                 </Form.Item>
             </Col>,
         );

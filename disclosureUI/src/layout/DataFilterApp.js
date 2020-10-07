@@ -16,7 +16,9 @@ class DataFilterApp extends Component {
     }
 
     handleSearch = (settings) => {
-        const url = `../api/disclosure/?state_name=${settings['state_name']}&api_number=${settings['api_number']}&operator_name=${settings['operator_name']}`;
+        const api_number = settings['api_number'] ? settings['api_number'] : ''
+        const operator_name = settings['operator_name']? settings['operator_name'] : ''
+        const url = `../api/disclosure/?state_name=${settings['state_name']}&api_number=${api_number}&operator_name=${operator_name}`;
         fetch(url)
             .then(response => response.json())
             .then(data => this.setState({
