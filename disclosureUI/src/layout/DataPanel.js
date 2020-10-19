@@ -7,6 +7,7 @@ import {Button, Col, Container, Row} from "reactstrap";
 import FilterPanel from "../component/FilterPanel";
 import DownloadButton from "../component/DownloadButton";
 import ShowHistogramButton from "../component/ShowHistogramButton";
+import D3Map from "../component/D3Map";
 
 const disclosureList = [
     {
@@ -62,7 +63,8 @@ class DataPanel extends React.Component {
                             <FilterPanel onShowMap={this.showMap}></FilterPanel>
                         </Col>
                         <Col xs="8">
-                            <Maps disclosures={this.state.filteredDisclosureList}/>
+                            <D3Map disclosures={this.state.filteredDisclosureList}/>
+                            {/*<Maps disclosures={this.state.filteredDisclosureList}/>*/}
                         </Col>
                     </Row>
                     <Row>

@@ -23,6 +23,7 @@
     "react-csv": "^2.0.3",
     "react-dom": "^16.13.1",
     "react-google-maps": "^9.4.5",
+    "react-simple-maps": "^2.1.2",
     "reactstrap": "^8.5.1",
     "style-loader": "^1.2.1",
     "svg-url-loader": "^6.0.0",
