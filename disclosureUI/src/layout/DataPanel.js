@@ -63,8 +63,8 @@ class DataPanel extends React.Component {
                             <FilterPanel onShowMap={this.showMap}></FilterPanel>
                         </Col>
                         <Col xs="8">
-                            <D3Map disclosures={this.state.filteredDisclosureList}/>
-                            {/*<Maps disclosures={this.state.filteredDisclosureList}/>*/}
+                            {/*<D3Map disclosures={this.state.filteredDisclosureList}/>*/}
+                            <Maps disclosures={this.state.filteredDisclosureList}/>
                         </Col>
                     </Row>
                     <Row>
