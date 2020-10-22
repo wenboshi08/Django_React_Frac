@@ -16,7 +16,7 @@ class AdvancedSearchForm extends Component {
                                 message: 'Input something!',
                             },
                         ],
-                    })(<Input placeholder="e.g., MA"/>)}
+                    })(<Input placeholder="e.g., Texas"/>)}
                 </Form.Item>
             </Col>,
         );
