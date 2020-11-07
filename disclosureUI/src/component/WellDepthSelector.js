@@ -1,28 +1,29 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import {Label, FormGroup, Input, FormText} from 'reactstrap';
 
-class TemperatureSelector extends React.Component {
+class WellDepthSelector extends Component {
     constructor(props) {
         super(props);
     }
 
+
     handleChange = (e) => {
-        this.props.onTemperatureChange(e.target.value)
+        this.props.onWellDepthChange(e.target.value)
     }
 
     render() {
         return (
             <FormGroup>
-                <Label>Temperature</Label>
-                <Input placeholder="Enter a temperature value"
+                <Label>Well Depth</Label>
+                <Input placeholder="Enter a well depth value"
                        type="number"
                        value={this.props.value}
                        onChange={this.handleChange}/>
-                <FormText>Type the low boundary for T (°C)</FormText>
+                <FormText>Type the low boundary for well depth (m)</FormText>
             </FormGroup>
-        )
+        );
     }
 }
 
-export default TemperatureSelector;
+export default WellDepthSelector;

@@ -19,6 +19,7 @@
     "antd": "^3.26.18",
     "babel-loader": "^8.1.0",
     "css-loader": "^4.2.1",
+    "pubchem-access": "^1.0.1",
     "react": "^16.13.1",
     "react-csv": "^2.0.3",
     "react-dom": "^16.13.1",

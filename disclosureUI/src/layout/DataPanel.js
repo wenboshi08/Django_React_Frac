@@ -43,7 +43,8 @@ class DataPanel extends React.Component {
 
     showMap = (selectedParameters) => {
         const filteredDisclosures = this.props.disclosureList.filter(
-            disclosure => disclosure.temperature_mean >= selectedParameters.temperature &&
+            disclosure => disclosure.well_depth >= selectedParameters.wellDepth &&
+                disclosure.temperature_mean >= selectedParameters.temperature &&
                 disclosure.chloride_mean >= selectedParameters.chloride &&
                 disclosure.bromide_mean >= selectedParameters.bromide &&
                 disclosure.iodide_mean >= selectedParameters.iodide
@@ -59,12 +60,14 @@ class DataPanel extends React.Component {
             <div>
                 <Container>
                     <Row>
-                        <Col xs="4">
-                            <FilterPanel onShowMap={this.showMap}></FilterPanel>
+                        <Col>
+                            <FilterPanel onShowMap={this.showMap}/>
                         </Col>
-                        <Col xs="8">
-                            {/*<D3Map disclosures={this.state.filteredDisclosureList}/>*/}
-                            <Maps disclosures={this.state.filteredDisclosureList}/>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <D3Map disclosures={this.state.filteredDisclosureList}/>
+                        {/*<Maps disclosures={this.state.filteredDisclosureList}/>*/}
                         </Col>
                     </Row>
                     <Row>

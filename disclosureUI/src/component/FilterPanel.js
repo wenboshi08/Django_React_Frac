@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import TemperatureSelector from './TemperatureSelector';
 import HalogenSelector from './HalogenSelector';
 import AutofillCheckbox from "./AutofillCheckbox";
-import {Button, ButtonGroup} from 'reactstrap';
+import {Row, Col, Button, ButtonGroup} from 'reactstrap';
+import WellDepthSelector from "./WellDepthSelector";
 
 const CL = 51982.505924;
 const BR = 564.729184;
@@ -12,6 +13,7 @@ class FilterPanel extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            wellDepth: 0,
             temperature: 0,
             chloride: {
                 value: 0,
@@ -33,6 +35,10 @@ class FilterPanel extends Component {
 
     handleTemperatureChange = (temperature) => {
         this.setState({temperature: temperature})
+    }
+
+    handleWellDepthChange = (wellDepth) => {
+        this.setState({wellDepth: wellDepth})
     }
 
     handleChlorideChange = (chloride) => {
@@ -194,6 +200,7 @@ class FilterPanel extends Component {
 
     onShowDisclosureMap = () => {
         this.props.onShowMap({
+            wellDepth: this.state.wellDepth,
             temperature: this.state.temperature,
             chloride: this.state.chloride.value,
             bromide: this.state.bromide.value,
@@ -206,8 +213,14 @@ class FilterPanel extends Component {
             <div>
                 <Button color="primary" onClick={this.onShowDisclosureMap}>Track on Map</Button>
                 <hr />
-                <TemperatureSelector value={this.state.temperature} onTemperatureChange={this.handleTemperatureChange}/>
-                <AutofillCheckbox onClick={{
+                <h5>Please set filters</h5>
+                <Row>
+                    <Col xs="4">
+                        <TemperatureSelector value={this.state.temperature} onTemperatureChange={this.handleTemperatureChange}/>
+                <WellDepthSelector value={this.state.wellDepth} onWellDepthChange={this.handleWellDepthChange}/>
+                    </Col>
+                    <Col xs="4">
+                        <AutofillCheckbox onClick={{
                     chlorideClick: this.onChlorideAutofillClick,
                     bromideClick: this.onBromideAutofillClick,
                     iodideClick: this.onIodideAutofillClick
@@ -217,12 +230,16 @@ class FilterPanel extends Component {
                                       bromide: this.state.bromide.autofill,
                                       iodide: this.state.iodide.autofill
                                   }}/>
-                <HalogenSelector id="chlorideConcentration" label="Chloride" value={this.state.chloride.value}
+                                    <HalogenSelector id="chlorideConcentration" label="Chloride" value={this.state.chloride.value}
                                  onHalogenChange={this.handleChlorideChange} disabled={this.state.chloride.disabled}/>
+                    </Col>
+                    <Col xs="4">
                 <HalogenSelector id="bromideConcentration" label="Bromide" value={this.state.bromide.value}
                                  onHalogenChange={this.handleBromideChange} disabled={this.state.bromide.disabled}/>
                 <HalogenSelector id="iodideConcentration" label="Iodide" value={this.state.iodide.value}
                                  onHalogenChange={this.handleIodideChange} disabled={this.state.iodide.disabled}/>
+                    </Col>
+                </Row>
             </div>
         );
     }

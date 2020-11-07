@@ -8,7 +8,7 @@ class TopBar extends Component {
             <div>
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
-                    <span className="App-title">Measured Flowback Composition</span>
+                    <span className="App-title"><a href="/">ECOGAP</a> Measured Flowback Composition</span>
                 </header>
             </div>
         );

@@ -33,8 +33,8 @@ class DataFilterApp extends Component {
             <div>
                 <Container>
                     <DataFilterForm handleSubmit={this.handleSearch}/>
-                    {/*<D3Map disclosures={this.state.filteredDisclosureList} />*/}
-                    <Maps disclosures={this.state.filteredDisclosureList}/>
+                    <D3Map disclosures={this.state.filteredDisclosureList} />
+                    {/*<Maps disclosures={this.state.filteredDisclosureList}/>*/}
                     <div style={{float: "right"}}>
                         <DownloadButton data={this.state.filteredDisclosureList}></DownloadButton>
                     </div>

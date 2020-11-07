@@ -6,45 +6,81 @@ import {
     DropdownToggle,
     Dropdown,
     DropdownItem,
-    Input,
     FormGroup,
     Label,
     Row,
     Col,
 } from 'reactstrap';
 
-const casList = require("../data/cas_list.json")
+import {Input, message} from 'antd';
 
-const aliasList = require("../data/castochemicalname.json")
+const {Search} = Input;
+const { TextArea } = Input;
+
+const casList = require("../data/cas_list.json");
+
+const aliasList = require("../data/castochemicalname.json");
+
+var pubchem = require("../../node_modules/pubchem-access").domain("compound");
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            casNumber: "",
             alias: [],
+        };
+        this.getCas = this.getCas.bind(this);
+    }
+
+    getCas = (chemicalName) => {
+        console.log(chemicalName);
+        pubchem
+            .setName(chemicalName)
+            .getCas()
+            .execute(this.setCas);
+    }
+
+    setCas = (data, status) => {
+        if (status ===1) {
+            this.setState({
+            casNumber: data
+        });
+            this.props.handleSearch(this.state.casNumber);
+            message.success('Found #CAS in PubChem successfully!');
+        } else {
+            message.error('Failed to find the doi');
         }
     }
 
 
     render() {
-        let alias = aliasList[this.props.value]
+        let alias = this.props.value in aliasList ? aliasList[this.props.value] : "not find this chemical in database"
         return (
             <Container style={{textAlign: "center"}}>
                 <h2>Explore Chemical Disclosure</h2>
-                <div>Quickly find geolocation information of specified chemicals</div>
+                <h5>Quickly find geolocation information of specified chemicals</h5>
                 <Row>
                     <Col sm="12" md={{size: 6, offset: 3}}>
                         <div>
-                            <datalist id="caslist-data">
-                                {casList.map(element => {
-                                    return <option value={element}></option>
-                                })}
-                            </datalist>
-                            <Input type="text"
-                                   list="caslist-data"
-                                   value={this.props.value}
-                                   onChange={this.props.handleChange}>
-                            </Input>
+                            {/*<datalist id="caslist-data">*/}
+                            {/*    {casList.map(element => {*/}
+                            {/*        return <option value={element}></option>*/}
+                            {/*    })}*/}
+                            {/*</datalist>*/}
+                            {/*<Input type="text"*/}
+                            {/*       list="caslist-data"*/}
+                            {/*       value={this.props.value}*/}
+                            {/*       onChange={this.props.handleChange}*/}
+                            {/*       placeholder="Type in CAS Number"*/}
+                            {/*>*/}
+                            {/*</Input>*/}
+                            <Search
+                                placeholder="Type in a Chemical Compound Name or CAS"
+                                enterButton="Search"
+                                size="large"
+                                onSearch={value => this.getCas(value)}
+                            />
                         </div>
                     </Col>
                 </Row>
@@ -52,8 +88,9 @@ class Header extends React.Component {
                     <Col>
                         <div>
                             <FormGroup>
-                                <Label for="exampleText">Alias Area</Label>
-                                <Input type="textarea" value={JSON.stringify(alias)}/>
+                                <Label for="exampleText">Alias Display Area</Label>
+                                <TextArea type="textarea" value={JSON.stringify(alias)}
+                                />
                             </FormGroup>
                         </div>
                     </Col>

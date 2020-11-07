@@ -13,8 +13,18 @@ class TransformationApp extends Component {
         }
     }
 
-    handleCasSelector = (event) => {
-        let newValue = event.target.value;
+    // handleCasSelector = (event) => {
+    //     let newValue = event.target.value;
+    //     fetch(`../api/disclosure/?cas_number_corrected=${newValue}`)
+    //         .then(response => response.json())
+    //         .then(data => this.setState({
+    //             casvalue: newValue,
+    //             disclosureList: data
+    //         }));
+    // }
+
+    handleCasSearch = (casvalue) => {
+        let newValue = casvalue;
         fetch(`../api/disclosure/?cas_number_corrected=${newValue}`)
             .then(response => response.json())
             .then(data => this.setState({
@@ -28,7 +38,7 @@ class TransformationApp extends Component {
         return (
             <div>
                 <Container>
-                    <Header value={this.state.casvalue} handleChange={this.handleCasSelector}/>
+                    <Header value={this.state.casvalue} handleSearch={this.handleCasSearch}/>
                 </Container>
                 <Container>
                     <DataPanel disclosureList={this.state.disclosureList}/>

@@ -7,7 +7,7 @@ class TopBar extends Component {
             <div>
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
-                    <span className="App-title">MapApp: Geochemistry and Chemical Disclosure</span>
+                    <span className="App-title"><a href="/">ECOGAP</a> MapApp: Geochemistry and Chemical Disclosure</span>
                 </header>
             </div>
         );

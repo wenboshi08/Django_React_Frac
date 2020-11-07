@@ -21,7 +21,7 @@ class AutofillCheckbox extends React.Component {
         }
         return (
             <div>
-                <h5>Halogen AutoFill Checkbox</h5>
+                <h6>Halogen AutoFill Checkbox</h6>
                 <ButtonGroup>
                     <Button color="primary"
                             onClick={this.props.onClick.chlorideClick}

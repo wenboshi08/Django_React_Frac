@@ -1,16 +1,19 @@
 import React, {Component} from 'react';
-import { Modal, Button, message} from "antd";
+import {Modal, Button, message} from "antd";
 import CreatePostForm from "./CreatePostForm";
 import * as Papa from 'papaparse';
 import axios from 'axios';
 import {CHEMTOCAS} from "../constants";
 
+var pubchem = require("../../node_modules/pubchem-access").domain("compound");
+
 class CreatePostButton extends Component {
-    constructor(){
+    constructor() {
         super();
-        this.state={
+        this.state = {
             visible: false,
             confirmLoading: false,
+            projectName: '',
         }
     }
 
@@ -26,7 +29,7 @@ class CreatePostButton extends Component {
             console.log('form values -> ', values);
             // post method should be used here
             if (!err) {
-                this.setState({confirmLoading: true})
+                this.setState({confirmLoading: true, projectName: values.project_name})
                 const csvFile = values.measurement_records[0].originFileObj;
                 console.log('csv file -> ', csvFile);
                 Papa.parse(csvFile, {
@@ -37,55 +40,72 @@ class CreatePostButton extends Component {
         });
     };
 
+
     //call back function to process the parsed results from papaparse
     postCSVRecord = (results) => {
-        this.form.validateFields((err, values) => {
-            const project_name = values.project_name;
-            const data = results.data;
-            const posts = data.map ((record) => {
-                            const chemical_name = record['compound_name'];
-                            const cas_number = CHEMTOCAS[chemical_name];
-                            const project_record = {...record,
-                                                    project_name: project_name,
-                                                    cas_number: cas_number}
-                            return axios({
-                                method: 'post',
-                                url: '../api/flowback/',
-                                data: JSON.stringify(project_record),
-                                headers: {
-                                    'Content-Type': 'application/json'
+        const project_name = this.state.projectName;
+        const data = results.data;
+        let ajaxCallsRemaining = data.length;
+        let processedRecord = [];
+        for (let i = 0; i < data.length; i++) {
+            const record = data[i];
+            const chemical_name = record['compound_name'];
+            pubchem
+                .setName(chemical_name)
+                .getCas()
+                .execute((data, status) => {
+                    const cas_number = data;
+                    const project_record = {
+                        ...record,
+                        project_name: project_name,
+                        cas_number: cas_number
+                    };
+                    processedRecord.push(project_record);
+                    --ajaxCallsRemaining;
+                    if (ajaxCallsRemaining <= 0) {
+                        const posts = processedRecord.map((project_record) => axios({
+                            method: 'post',
+                            url: '../api/flowback/',
+                            data: JSON.stringify(project_record),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        }));
+                        axios.all(posts)
+                            .then(
+                                axios.spread((...responses) => {
+                                    console.log(responses);
+                                    return responses.map(response => response.status === 201);
+                                })
+                            )
+                            .then((results) => {
+                                    console.log(results);
+                                    if (results.every(result => result === true)) {
+                                        console.log('all post response OK');
+                                        return this.props.updateData();
+                                    } else {
+                                        throw new Error('Failed to create posts.');
+                                    }
                                 }
+                            )
+                            .then(() => {
+                                this.setState({visible: false, confirmLoading: false, projectName: '',});
+                                this.form.resetFields();
+                                message.success('Post created successfully!');
                             })
-                        })
-        axios.all(posts)
-            .then(
-                axios.spread((...responses) =>{
-                    console.log(responses);
-                    return responses.map(response => response.status === 201);
-                })
-            )
-            .then ((results) => {
-                console.log(results);
-                if (results.every(result => result ===true)) {
-                    console.log('all post response OK');
-                    return this.props.updateData();
-                    } else {
-                    throw new Error('Failed to create posts.');
+                            .catch((e) => {
+                                console.error(e);
+                                message.error('Failed to create post.');
+                                this.setState({confirmLoading: false, projectName: '',});
+                            })
+
                     }
-                }
-            )
-            .then(() => {
-                this.setState({visible: false, confirmLoading: false});
-                this.form.resetFields();
-                message.success('Post created successfully!');
-            })
-            .catch((e) => {
-                console.error(e);
-                message.error('Failed to create post.');
-                this.setState({confirmLoading: false});
-            })
-        })
+                })
+
+        }
     }
+
+
 
     handleCancel = () => {
         console.log('Clicked cancel button');
@@ -99,9 +119,9 @@ class CreatePostButton extends Component {
     }
 
     render() {
-        const { visible, confirmLoading } = this.state;
+        const {visible, confirmLoading} = this.state;
         return (
-            <div style={{margin:"0px 5px"}}>
+            <div style={{margin: "0px 5px"}}>
                 <Button type="primary" onClick={this.showModal}>
                     Create New Post
                 </Button>
@@ -112,8 +132,8 @@ class CreatePostButton extends Component {
                     okText='Submit'
                     confirmLoading={confirmLoading}
                     onCancel={this.handleCancel}
-                    >
-                    <CreatePostForm ref={this.getFormRef} />
+                >
+                    <CreatePostForm ref={this.getFormRef}/>
                 </Modal>
             </div>
         );
