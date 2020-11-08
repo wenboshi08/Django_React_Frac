@@ -21,7 +21,7 @@ class HalogenSelector extends React.Component {
                        value={this.props.value}
                        onChange={this.handleChange}
                        disabled={this.props.disabled}/>
-                <FormText>{`Type the low boundary for ${this.props.label} in unit of mg/L`}</FormText>
+                <FormText>{`Type the low boundary for ${this.props.label} (mg/L)`}</FormText>
             </FormGroup>
         )
     }

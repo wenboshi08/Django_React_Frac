@@ -16,6 +16,7 @@ class ShowHistogramButton extends Component {
         this.setState({
             visible: true,
         });
+
     };
 
     handleCancel = () => {
@@ -27,7 +28,7 @@ class ShowHistogramButton extends Component {
 
 
     render() {
-        const { visible, confirmLoading } = this.state;
+        const { visible, confirmLoading} = this.state;
 
         return (
             <div style={{margin:"0px 5px"}}>
