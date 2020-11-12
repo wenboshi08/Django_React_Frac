@@ -92,6 +92,12 @@ class FlowbackTable extends Component {
                 ...this.getColumnSearchProps('project_name'),
             },
             {
+                title: 'Institute',
+                dataIndex:'institute',
+                key: 'institute',
+                ...this.getColumnSearchProps('institute'),
+            },
+            {
                 title: 'Api Number',
                 dataIndex:'api_number',
                 key: 'api_number',
@@ -128,6 +134,12 @@ class FlowbackTable extends Component {
                 ...this.getColumnSearchProps('longitude'),
             },
             {
+                title: 'Sample Collection Date',
+                dataIndex:'sample_collection_date',
+                key: 'sample_collection_date',
+                ...this.getColumnSearchProps('sample_collection_date'),
+            },
+            {
                 title: 'Compound Name',
                 dataIndex:'compound_name',
                 key: 'compound_name',
@@ -156,6 +168,12 @@ class FlowbackTable extends Component {
                 dataIndex:'standard_deviation',
                 key: 'standard_deviation',
                 ...this.getColumnSearchProps('standard_deviation'),
+            },
+            {
+                title: 'Sample Upload Date',
+                dataIndex:'sample_upload_date',
+                key: 'sample_upload_date',
+                ...this.getColumnSearchProps('sample_upload_date'),
             },
             {
                 title: 'Reference',

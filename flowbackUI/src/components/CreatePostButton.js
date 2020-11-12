@@ -14,6 +14,7 @@ class CreatePostButton extends Component {
             visible: false,
             confirmLoading: false,
             projectName: '',
+            institute:'',
         }
     }
 
@@ -29,7 +30,9 @@ class CreatePostButton extends Component {
             console.log('form values -> ', values);
             // post method should be used here
             if (!err) {
-                this.setState({confirmLoading: true, projectName: values.project_name})
+                this.setState({confirmLoading: true,
+                    projectName: values.project_name,
+                    institute: values.institute})
                 const csvFile = values.measurement_records[0].originFileObj;
                 console.log('csv file -> ', csvFile);
                 Papa.parse(csvFile, {
@@ -44,6 +47,7 @@ class CreatePostButton extends Component {
     //call back function to process the parsed results from papaparse
     postCSVRecord = (results) => {
         const project_name = this.state.projectName;
+        const institute = this.state.institute;
         const data = results.data;
         let ajaxCallsRemaining = data.length;
         let processedRecord = [];
@@ -58,6 +62,7 @@ class CreatePostButton extends Component {
                     const project_record = {
                         ...record,
                         project_name: project_name,
+                        institute: institute,
                         cas_number: cas_number
                     };
                     processedRecord.push(project_record);

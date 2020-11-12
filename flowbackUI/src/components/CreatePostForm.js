@@ -27,6 +27,11 @@ class NormalCreatePostForm extends React.Component {
                         rules: [{required: true, message: 'Please input Project Name for this upload'}],
                     })(<Input />)}
                 </Form.Item>
+                <Form.Item label="Institute">
+                    {getFieldDecorator('institute', {
+                        rules: [{required: true, message: 'Please input Institute for this upload'}],
+                    })(<Input />)}
+                </Form.Item>
                 <Form.Item label="Measurement Records">
                     <div className="dropbox">
                         {getFieldDecorator('measurement_records', {
