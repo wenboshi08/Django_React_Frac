@@ -17,6 +17,7 @@ class Main extends Component {
         super();
         this.state = {
             flowbackRecords: undefined,
+            filteredRecords: undefined,
         }
     }
 
@@ -30,7 +31,8 @@ class Main extends Component {
             .then(response => {
                 console.log(response.data);
                 this.setState({
-                    flowbackRecords: response.data
+                    flowbackRecords: response.data,
+                    filteredRecords: response.data,
                 })
             })
             .catch(error => {
@@ -38,11 +40,17 @@ class Main extends Component {
             })
     }
 
+    handleTableFilter = (pagination, filters, sorter, extra) => {
+        this.setState({
+            filteredRecords: extra.currentDataSource,
+        })
+    }
+
     render() {
         const operations =
             <div style={{display: "flex"}}>
                 <div style={{margin:"0px 5px"}}>
-                <Button type="primary" icon="download" href='https://djangohydroapp.s3.amazonaws.com/flowback_template.csv'>Download Template</Button>
+                <Button type="primary" icon="download" href='https://djangohydroapp.s3.amazonaws.com/flowback_template_with_instructions.csv'>Download Template</Button>
                 </div>
             <CreatePostButton updateData={this.fetchFlowbackRecords}/>
             </div>
@@ -50,7 +58,7 @@ class Main extends Component {
             <div>
                 <Tabs tabBarExtraContent={operations} className="main-tabs">
                     <TabPane tab="Flowback Posts" key="1">
-                        <FlowbackTable data={this.state.flowbackRecords}/>
+                        <FlowbackTable data={this.state.flowbackRecords} onChange={this.handleTableFilter}/>
                     </TabPane>
                     <TabPane tab="Map" key="2">
                         <FlowbackMap
@@ -64,8 +72,8 @@ class Main extends Component {
                 </Tabs>
 
                 <div style={{display: "flex"}}>
-                    <DownloadButton data={this.state.flowbackRecords}></DownloadButton>
-                    <DownloadDOIButton data={this.state.flowbackRecords}></DownloadDOIButton>
+                    <DownloadButton data={this.state.filteredRecords}></DownloadButton>
+                    <DownloadDOIButton data={this.state.filteredRecords}></DownloadDOIButton>
                 </div>
             </div>
         );

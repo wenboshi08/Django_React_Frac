@@ -104,18 +104,6 @@ class FlowbackTable extends Component {
                 ...this.getColumnSearchProps('api_number'),
             },
             {
-                title: 'State Number',
-                dataIndex:'state_number',
-                key: 'state_number',
-                ...this.getColumnSearchProps('state_number'),
-            },
-            {
-                title: 'County Number',
-                dataIndex:'county_number',
-                key: 'county_number',
-                ...this.getColumnSearchProps('county_number'),
-            },
-            {
                 title: 'Well Name',
                 dataIndex:'well_name',
                 key: 'well_name',
@@ -184,7 +172,7 @@ class FlowbackTable extends Component {
         ];
 
         return (
-            <Table columns={columns} dataSource={this.props.data} />
+            <Table columns={columns} dataSource={this.props.data} onChange={this.props.onChange} scroll={{ x: 'max-content' }}/>
         );
     }
 }

@@ -6,8 +6,6 @@ class FlowbackMeasurement(models.Model):
     project_name = models.CharField(max_length=150)
     institute = models.CharField(max_length=150)
     api_number = models.CharField(max_length=14)
-    state_number = models.CharField(max_length=2)
-    county_number = models.CharField(max_length=3)
     well_name = models.CharField(max_length=150)
     latitude = models.FloatField()
     longitude = models.FloatField()
