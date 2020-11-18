@@ -42,13 +42,26 @@ class DataPanel extends React.Component {
     }
 
     showMap = (selectedParameters) => {
-        const filteredDisclosures = this.props.disclosureList.filter(
+        let filteredDisclosures;
+        if (selectedParameters.stateNameDisabled) {
+            filteredDisclosures = this.props.disclosureList.filter(
             disclosure => disclosure.well_depth >= selectedParameters.wellDepth &&
                 disclosure.temperature_mean >= selectedParameters.temperature &&
                 disclosure.chloride_mean >= selectedParameters.chloride &&
                 disclosure.bromide_mean >= selectedParameters.bromide &&
                 disclosure.iodide_mean >= selectedParameters.iodide
-        );
+        )
+        } else {
+            filteredDisclosures = this.props.disclosureList.filter(
+            disclosure => disclosure.well_depth >= selectedParameters.wellDepth &&
+                disclosure.temperature_mean >= selectedParameters.temperature &&
+                disclosure.chloride_mean >= selectedParameters.chloride &&
+                disclosure.bromide_mean >= selectedParameters.bromide &&
+                disclosure.iodide_mean >= selectedParameters.iodide &&
+                disclosure.state_name === selectedParameters.stateName
+        )
+        }
+
         this.setState({
             filteredDisclosureList: filteredDisclosures
         })

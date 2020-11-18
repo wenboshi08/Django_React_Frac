@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Label, FormGroup, Input, FormText} from 'reactstrap';
+import {Label, FormGroup, Input, FormText, Form} from 'reactstrap';
 
 class HalogenSelector extends React.Component {
     constructor(props) {
@@ -14,15 +14,23 @@ class HalogenSelector extends React.Component {
     render() {
 
         return (
-            <FormGroup>
-                <Label>{this.props.label}</Label>
-                <Input placeholder={`Enter a ${this.props.label} value`}
-                       type="number"
-                       value={this.props.value}
-                       onChange={this.handleChange}
-                       disabled={this.props.disabled}/>
-                <FormText>{`Type the low boundary for ${this.props.label} (mg/L)`}</FormText>
-            </FormGroup>
+            <Form>
+                <FormGroup>
+                    <Label>{this.props.label}</Label>
+                    <div>
+                    <Label check>
+                        <Input type="checkbox" onChange={this.props.onAutofillChange}/> Enable Autofill
+                    </Label>
+                     </div>
+
+                    <Input placeholder={`Enter a ${this.props.label} value`}
+                           type="number"
+                           value={this.props.value}
+                           onChange={this.handleChange}
+                           disabled={this.props.disabled}/>
+                    <FormText>{`Type the low boundary for ${this.props.label} (mg/L)`}</FormText>
+                </FormGroup>
+            </Form>
         )
     }
 }

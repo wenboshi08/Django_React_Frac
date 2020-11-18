@@ -4,6 +4,7 @@ import HalogenSelector from './HalogenSelector';
 import AutofillCheckbox from "./AutofillCheckbox";
 import {Row, Col, Button, ButtonGroup} from 'reactstrap';
 import WellDepthSelector from "./WellDepthSelector";
+import StateNameSelector from "./StateNameSelector";
 
 const CL = 51982.505924;
 const BR = 564.729184;
@@ -29,7 +30,9 @@ class FilterPanel extends Component {
                 value: 0,
                 autofill: false,
                 disabled: false
-            }
+            },
+            stateNameDisabled: true,
+            stateName:''
         }
     }
 
@@ -197,6 +200,21 @@ class FilterPanel extends Component {
         });
     }
 
+    onEnableStateChange = () => {
+        this.setState((state) => {
+            return {
+                stateNameDisabled: !state.stateNameDisabled,
+                stateName: 'Alabama'
+            }
+        })
+    }
+
+    onStateNamePick = (stateName) => {
+        this.setState({
+            stateName: stateName,
+        })
+    }
+
 
     onShowDisclosureMap = () => {
         this.props.onShowMap({
@@ -205,6 +223,8 @@ class FilterPanel extends Component {
             chloride: this.state.chloride.value,
             bromide: this.state.bromide.value,
             iodide: this.state.iodide.value,
+            stateNameDisabled: this.state.stateNameDisabled,
+            stateName: this.state.stateName,
         });
     }
 
@@ -212,32 +232,33 @@ class FilterPanel extends Component {
         return (
             <div>
                 <Button color="primary" onClick={this.onShowDisclosureMap}>Track on Map</Button>
-                <hr />
+                <hr/>
                 <h5>Please set filters</h5>
                 <Row>
                     <Col xs="4">
-                        <TemperatureSelector value={this.state.temperature} onTemperatureChange={this.handleTemperatureChange}/>
-                <WellDepthSelector value={this.state.wellDepth} onWellDepthChange={this.handleWellDepthChange}/>
+                        <TemperatureSelector value={this.state.temperature}
+                                             onTemperatureChange={this.handleTemperatureChange}/>
+                        <WellDepthSelector value={this.state.wellDepth} onWellDepthChange={this.handleWellDepthChange}/>
                     </Col>
                     <Col xs="4">
-                        <AutofillCheckbox onClick={{
-                    chlorideClick: this.onChlorideAutofillClick,
-                    bromideClick: this.onBromideAutofillClick,
-                    iodideClick: this.onIodideAutofillClick
-                }}
-                                  autofill={{
-                                      chloride: this.state.chloride.autofill,
-                                      bromide: this.state.bromide.autofill,
-                                      iodide: this.state.iodide.autofill
-                                  }}/>
-                                    <HalogenSelector id="chlorideConcentration" label="Chloride" value={this.state.chloride.value}
-                                 onHalogenChange={this.handleChlorideChange} disabled={this.state.chloride.disabled}/>
+                        <HalogenSelector id="chlorideConcentration" label="Chloride" value={this.state.chloride.value}
+                                         onHalogenChange={this.handleChlorideChange}
+                                         onAutofillChange={this.onChlorideAutofillClick}
+                                         disabled={this.state.chloride.disabled}/>
+                        <HalogenSelector id="bromideConcentration" label="Bromide" value={this.state.bromide.value}
+                                         onHalogenChange={this.handleBromideChange}
+                                         onAutofillChange={this.onBromideAutofillClick}
+                                         disabled={this.state.bromide.disabled}/>
                     </Col>
                     <Col xs="4">
-                <HalogenSelector id="bromideConcentration" label="Bromide" value={this.state.bromide.value}
-                                 onHalogenChange={this.handleBromideChange} disabled={this.state.bromide.disabled}/>
-                <HalogenSelector id="iodideConcentration" label="Iodide" value={this.state.iodide.value}
-                                 onHalogenChange={this.handleIodideChange} disabled={this.state.iodide.disabled}/>
+                        <HalogenSelector id="iodideConcentration" label="Iodide" value={this.state.iodide.value}
+                                         onHalogenChange={this.handleIodideChange}
+                                         onAutofillChange={this.onIodideAutofillClick}
+                                         disabled={this.state.iodide.disabled}/>
+                        <StateNameSelector value={this.state.stateName}
+                                         onStateNameChange={this.onStateNamePick}
+                                         onEnableStateChange={this.onEnableStateChange}
+                                         disabled={this.state.stateNameDisabled}/>
                     </Col>
                 </Row>
             </div>
