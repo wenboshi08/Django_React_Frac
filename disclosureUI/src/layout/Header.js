@@ -49,7 +49,7 @@ class Header extends React.Component {
             this.props.handleSearch(this.state.casNumber);
             message.success('Found #CAS in PubChem successfully!');
         } else {
-            message.error('Failed to find the doi');
+            message.error('Failed to find the #CAS in PubChem');
         }
     }
 
