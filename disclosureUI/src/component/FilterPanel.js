@@ -261,6 +261,8 @@ class FilterPanel extends Component {
                                          disabled={this.state.stateNameDisabled}/>
                     </Col>
                 </Row>
+                <hr/>
+                <Button color="primary" onClick={this.onShowDisclosureMap}>Track on Map</Button>
             </div>
         );
     }
