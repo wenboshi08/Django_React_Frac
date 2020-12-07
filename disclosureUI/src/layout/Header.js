@@ -55,7 +55,7 @@ class Header extends React.Component {
 
 
     render() {
-        let alias = this.props.value in aliasList ? aliasList[this.props.value] : "not find this chemical in database"
+        let alias = this.props.value in aliasList ? aliasList[this.props.value] : "chemical not found in database"
         return (
             <Container style={{textAlign: "center"}}>
                 <h2>Explore Chemical Disclosure</h2>

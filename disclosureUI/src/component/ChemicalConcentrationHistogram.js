@@ -15,6 +15,14 @@ class ChemicalConcentrationHistogram extends Component {
         super(props);
     }
 
+    generateData = () => {
+        const data = this.props.data.map((disclosure) => {
+            return disclosure.percent_high_additive;
+        });
+        return data;
+    }
+
+
     render() {
         return (
             <div style={{height: 400}}>
@@ -37,9 +45,7 @@ class ChemicalConcentrationHistogram extends Component {
                 >
                     <BarSeries
                         animated
-                        rawData={this.props.data.map((disclosure) => {
-                            return disclosure.percent_high_additive;
-                        })}
+                        rawData={this.generateData()}
                     />
                     <XAxis label="Chemical Concentration mg/L"/>
                     <YAxis label="Count"/>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Button, Modal } from "antd";
 import ChemicalConcentrationHistogram from "./ChemicalConcentrationHistogram";
+import WellProportionPieChart from "./WellProportionPieChart";
 import {CSVLink} from "react-csv/lib";
 
 class ShowHistogramButton extends Component {
@@ -33,16 +34,17 @@ class ShowHistogramButton extends Component {
         return (
             <div style={{margin:"0px 5px"}}>
                 <Button type="primary" shape="round" icon="line-chart" disabled={this.props.data.length===0} onClick={this.showModal}>
-                    Show Concentration Histogram
+                    Show Statistics
                 </Button>
                 <Modal
-                    title="Show Concentration Histogram"
+                    title="Show Statistics"
                     visible={visible}
                     confirmLoading={confirmLoading}
                     onCancel={this.handleCancel}
                     okButtonProps={{style: {display: 'none'}}}
                     >
                     <ChemicalConcentrationHistogram data={this.props.data}/>
+                    <WellProportionPieChart data={this.props.data}/>
                 </Modal>
             </div>
         );

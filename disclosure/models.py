@@ -31,7 +31,7 @@ class Disclosure(models.Model):
     is_water = models.FloatField(blank=True, null=True)
     purpose_percent_hf_job = models.FloatField(blank=True, null=True)
     purpose_ingredient_msds = models.FloatField(blank=True, null=True)
-    ingredient_key = models.CharField(max_length=150, primary_key=True)
+    ingredient_key = models.CharField(max_length=150)
     ingredient_name = models.CharField(max_length=150,blank=True, null=True)
     cas_number = models.CharField(max_length=20, blank=True, null=True)
     percent_high_additive = models.FloatField(blank=True, null=True)

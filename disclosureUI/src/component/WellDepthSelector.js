@@ -16,6 +16,10 @@ class WellDepthSelector extends Component {
         return (
             <FormGroup>
                 <Label>Well Depth</Label>
+                <div>
+                    <Label check>
+                    </Label>
+                </div>
                 <Input placeholder="Enter a well depth value"
                        type="number"
                        value={this.props.value}

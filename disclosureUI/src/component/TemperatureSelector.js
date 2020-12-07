@@ -15,6 +15,10 @@ class TemperatureSelector extends React.Component {
         return (
             <FormGroup>
                 <Label>Temperature</Label>
+                <div>
+                    <Label check>
+                    </Label>
+                </div>
                 <Input placeholder="Enter a temperature value"
                        type="number"
                        value={this.props.value}
