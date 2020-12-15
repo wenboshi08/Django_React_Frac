@@ -28,7 +28,10 @@ DEBUG = True
 # ALLOWED_HOSTS = ['django-react-hydro.eba-r2aqsr9e.us-east-1.elasticbeanstalk.com']
 ALLOWED_HOSTS =['127.0.0.1',
                 'ec2-52-86-143-14.compute-1.amazonaws.com',
-                '52.86.143.14',
+                '3.237.21.250',
+                'ec2-3-237-21-250.compute-1.amazonaws.com',
+                '18.208.164.135',
+                'ec2-3-237-21-250.compute-1.amazonaws.com',
                 'django-react-hydro.eba-r2aqsr9e.us-east-1.elasticbeanstalk.com']
 
 # Application definition
