@@ -32,7 +32,8 @@ ALLOWED_HOSTS =['127.0.0.1',
                 'ec2-3-237-21-250.compute-1.amazonaws.com',
                 '18.208.164.135',
                 'ec2-18-208-164-135.compute-1.amazonaws.com',
-                'django-react-hydro.eba-r2aqsr9e.us-east-1.elasticbeanstalk.com']
+                'django-react-hydro.eba-r2aqsr9e.us-east-1.elasticbeanstalk.com',
+                'ecogap.mit.edu']
 
 # Application definition
 
@@ -102,9 +103,9 @@ DATABASES = {
         'USER': 'djangoadmin',
         'PASSWORD': 'django1234',
         # full dataset
-        # 'HOST': 'ecogapdb.c3vpgxu9lyeq.us-east-1.rds.amazonaws.com',
+        'HOST': 'ecogapdb.c3vpgxu9lyeq.us-east-1.rds.amazonaws.com',
         # partial dataset
-        'HOST': 'djangodatabase.ckgqvtxdjqra.us-east-1.rds.amazonaws.com',
+        # 'HOST': 'djangodatabase.ckgqvtxdjqra.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
