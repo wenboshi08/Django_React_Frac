@@ -103,9 +103,9 @@ DATABASES = {
         'USER': 'djangoadmin',
         'PASSWORD': 'django1234',
         # full dataset
-        'HOST': 'ecogapdb.c3vpgxu9lyeq.us-east-1.rds.amazonaws.com',
+        # 'HOST': 'ecogapdb.c3vpgxu9lyeq.us-east-1.rds.amazonaws.com',
         # partial dataset
-        # 'HOST': 'djangodatabase.ckgqvtxdjqra.us-east-1.rds.amazonaws.com',
+        'HOST': 'djangodatabase.ckgqvtxdjqra.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
